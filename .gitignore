@@ -1,0 +1,17 @@
+# --- Project Scripts (Don't upload these) ---
+main.py
+fetch_leetcode.py
+process_with_ai.py
+check_models.py
+requirements.txt
+
+# --- Data & Tracking Files ---
+processed_submissions.json
+
+# --- System & Cache Files ---
+__pycache__/
+*.pyc
+.env
+.DS_Store
+.vscode/
+.idea/
