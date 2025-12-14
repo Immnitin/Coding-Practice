@@ -3,6 +3,7 @@ main.py
 fetch_leetcode.py
 process_with_ai.py
 check_models.py
+watcher.py
 requirements.txt
 
 # --- Data & Tracking Files ---
