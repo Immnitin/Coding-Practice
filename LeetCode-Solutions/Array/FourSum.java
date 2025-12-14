@@ -1,0 +1,74 @@
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+/**
+ * Approach: This solution uses the two-pointer technique to find four numbers in an array that sum up to a target value.
+ * It first sorts the array and then uses two nested loops to fix the first two numbers. The remaining two numbers are found using the two-pointer technique.
+ * Time Complexity: O(n^3), where n is the number of elements in the array.
+ * Space Complexity: O(n), where n is the number of elements in the array.
+ */
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        Arrays.sort(nums);
+        List<List<Integer>> arr = new ArrayList<>();
+        int cnt = 0;
+        if (nums.length < 4) {
+            return arr;
+        }
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[i - 1]) {
+                cnt++;
+            }
+        }
+        if (cnt == nums.length - 1) {
+            if ((long) nums[0] + nums[1] + nums[2] + nums[3] == target) {
+                List<Integer> res = new ArrayList<>(List.of(nums[0], nums[1], nums[2], nums[3]));
+                arr.add(res);
+                return arr;
+            } else
+                return arr;
+        }
+        for (int i = 0; i < nums.length-3; i++) {
+            if (i > 0 && nums[i] == nums[i - 1])
+                continue;
+            for (int j = i + 1; j < nums.length-2; j++) {
+                if (j > i + 1 && nums[j] == nums[j - 1])
+                    continue;
+                int k = j + 1;
+                int l = nums.length - 1;
+                while (k < l) {
+                    long sum = (long) nums[i] + nums[j] + nums[k] + nums[l];
+                    if (sum == (long) target) {
+                        List<Integer> res = new ArrayList<>(List.of(nums[i], nums[j], nums[k], nums[l]));
+                        arr.add(res);
+                        while (k < l && nums[k] == nums[k + 1])
+                            k++;
+                        while (k < l && nums[l] == nums[l - 1])
+                            l--;
+                        k++;
+                        l--;
+                    } else if (sum < target) {
+                        k++;
+                    } else if (sum > target) {
+                        l--;
+                    }
+                }
+            }
+        }
+        return arr;
+    }
+}
+public class Driver {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int[] nums1 = {1, 0, -1, 0, -2, 2};
+        int target1 = 0;
+        System.out.println(solution.fourSum(nums1, target1));
+        int[] nums2 = {2, 2, 2, 2, 2};
+        int target2 = 8;
+        System.out.println(solution.fourSum(nums2, target2));
+        int[] nums3 = {-2, -1, -1, 1, 1, 2, 2};
+        int target3 = 0;
+        System.out.println(solution.fourSum(nums3, target3));
+    }
+}
