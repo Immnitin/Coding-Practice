@@ -1,13 +1,24 @@
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
+
 /**
- * Approach: This solution uses the two-pointer technique to find four numbers in an array that sum up to a target value.
- * It first sorts the array and then uses two nested loops to fix the first two numbers. The remaining two numbers are found using the two-pointer technique.
- * Time Complexity: O(n^3), where n is the number of elements in the array.
- * Space Complexity: O(n), where n is the number of elements in the array.
+ * This class provides a solution to the 4Sum problem.
+ * 
+ * Approach: 
+ * The algorithm uses a two-pointer technique to find four numbers in the array that sum up to the target.
+ * It first sorts the array and then uses two nested loops to fix the first two numbers.
+ * The two-pointer technique is then used to find the remaining two numbers.
+ * 
+ * Time Complexity: 
+ * The time complexity of this solution is O(n^3), where n is the number of elements in the array.
+ * This is because there are three nested loops in the solution.
+ * 
+ * Space Complexity: 
+ * The space complexity of this solution is O(n), where n is the number of elements in the array.
+ * This is because in the worst case, the solution might store all the elements in the result list.
  */
-class Solution {
+public class Solution {
+    class Solution {
     public List<List<Integer>> fourSum(int[] nums, int target) {
         Arrays.sort(nums);
         List<List<Integer>> arr = new ArrayList<>();
@@ -58,17 +69,23 @@ class Solution {
         return arr;
     }
 }
+}
+
 public class Driver {
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int[] nums1 = {1, 0, -1, 0, -2, 2};
-        int target1 = 0;
-        System.out.println(solution.fourSum(nums1, target1));
-        int[] nums2 = {2, 2, 2, 2, 2};
-        int target2 = 8;
-        System.out.println(solution.fourSum(nums2, target2));
-        int[] nums3 = {-2, -1, -1, 1, 1, 2, 2};
-        int target3 = 0;
-        System.out.println(solution.fourSum(nums3, target3));
+        int[][] testCases = {
+            {1, 0, -1, 0, -2, 2},
+            {2, 2, 2, 2, 2},
+            {-2, -1, -1, 1, 1, 2, 2}
+        };
+        int[] targets = {0, 8, 0};
+        for (int i = 0; i < testCases.length; i++) {
+            System.out.println("Test Case " + (i + 1) + ":");
+            System.out.println("Input: " + Arrays.toString(testCases[i]));
+            System.out.println("Target: " + targets[i]);
+            System.out.println("Result: " + solution.fourSum(testCases[i], targets[i]));
+            System.out.println();
+        }
     }
 }
