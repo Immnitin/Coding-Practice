@@ -1,18 +1,22 @@
-# --- Project Scripts (Don't upload these) ---
-main.py
-fetch_leetcode.py
-process_with_ai.py
-check_models.py
-watcher.py
-requirements.txt
+# --- 1. LOCKDOWN: Ignore EVERYTHING by default ---
+# This ensures main.py, watcher.py, API keys, etc. are hidden.
+*
 
-# --- Data & Tracking Files ---
-processed_submissions.json
+# --- 2. ALLOWLIST: Explicitly reveal only what you want on GitHub ---
+!README.md
+!.gitignore
 
-# --- System & Cache Files ---
-__pycache__/
-*.pyc
-.env
+# Allow LeetCode Solutions
+!LeetCode-Solutions/
+!LeetCode-Solutions/**
+
+# Allow GeeksforGeeks Solutions
+!GeeksforGeeks-Solutions/
+!GeeksforGeeks-Solutions/**
+
+# --- 3. CLEANUP: Filter out junk even from the allowed folders ---
+# (e.g., if Java compiles .class files inside your solution folder, hide them)
+*.class
+*.log
 .DS_Store
-.vscode/
-.idea/
+Thumbs.db
