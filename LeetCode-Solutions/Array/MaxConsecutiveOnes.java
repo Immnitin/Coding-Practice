@@ -1,13 +1,10 @@
 import java.util.Arrays;
 /**
- * Approach: This solution uses a simple iterative approach to find the maximum consecutive ones in the given array.
- * It iterates through the array and keeps track of the current count of consecutive ones and the maximum count found so far.
- * 
+ * Approach: Uses a simple iterative approach to track the maximum consecutive ones in the array.
  * Time Complexity: O(n), where n is the number of elements in the array.
- * Space Complexity: O(1), as it uses a constant amount of space to store the count and max variables.
+ * Space Complexity: O(1), as it only uses a constant amount of space to store the count and max variables.
  */
-public class Solution {
-    class Solution {
+class Solution {
     public int findMaxConsecutiveOnes(int[] nums) {
         int n=nums.length;
         int count=0;
@@ -24,9 +21,7 @@ public class Solution {
     return max;
 }
 }
-}
-
-class Driver {
+public class Driver {
     public static void main(String[] args) {
         Solution solution = new Solution();
         int[][] testCases = {
@@ -35,7 +30,7 @@ class Driver {
             {0, 0, 0, 1, 1, 1}
         };
         for (int[] testCase : testCases) {
-            System.out.println("Max consecutive ones: " + solution.findMaxConsecutiveOnes(testCase));
+            System.out.println("Max Consecutive Ones: " + solution.findMaxConsecutiveOnes(testCase));
         }
     }
 }
