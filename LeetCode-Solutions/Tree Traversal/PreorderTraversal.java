@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * This class provides a solution for the preorder traversal of a binary tree.
@@ -7,13 +8,16 @@ import java.util.List;
  * @author [Your Name]
  * @version 1.0
  */
-public class PreorderTraversal {
+public class Solution {
     /**
-     * Uses a recursive helper function to perform the preorder traversal of a binary tree.
-     * The approach involves visiting the current node, then recursively traversing the left subtree, and finally the right subtree.
+     * Uses a stack-based iterative approach to perform a preorder traversal of the binary tree.
+     * The algorithm starts by pushing the root node onto the stack, then enters a loop where it pops a node from the stack, adds its value to the result list, and pushes its right and left children onto the stack.
      * 
      * Time Complexity: O(N), where N is the number of nodes in the binary tree, since each node is visited once.
-     * Space Complexity: O(N), due to the recursive call stack and the space required to store the result.
+     * Space Complexity: O(N), where N is the number of nodes in the binary tree, since in the worst case, the stack can contain all nodes at the last level of the tree.
+     * 
+     * @param root The root of the binary tree.
+     * @return A list of node values in preorder traversal order.
      */
     /**
  * Definition for a binary tree node.
@@ -40,30 +44,39 @@ class Solution {
         if(root==null){
             return;
         }
-        list.add(root.val);
-        helper(root.left,list);
-        helper(root.right,list);
+        // list.add(root.val);
+        // helper(root.left,list);
+        // helper(root.right,list);
+        Stack<TreeNode> stk=new Stack<>();
+        stk.push(root);
+        while(!stk.isEmpty()){
+            TreeNode num=stk.pop();
+            list.add(num.val);
+            if(num.right!=null){
+                stk.push(num.right);
+            }
+            if(num.left!=null){
+                stk.push(num.left);
+            }
+        }
     }
 }
+}
 
-    public static class Driver {
-        public static void main(String[] args) {
-            Solution solution = new Solution();
-            // Test case 1: Empty tree
-            TreeNode root1 = null;
-            System.out.println("Test case 1: " + solution.preorderTraversal(root1));
-            // Test case 2: Single node tree
-            TreeNode root2 = new TreeNode(1);
-            System.out.println("Test case 2: " + solution.preorderTraversal(root2));
-            // Test case 3: Balanced binary tree
-            TreeNode root3 = new TreeNode(1);
-            root3.left = new TreeNode(2);
-            root3.right = new TreeNode(3);
-            root3.left.left = new TreeNode(4);
-            root3.left.right = new TreeNode(5);
-            root3.right.left = new TreeNode(6);
-            root3.right.right = new TreeNode(7);
-            System.out.println("Test case 3: " + solution.preorderTraversal(root3));
-        }
+class Driver {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        // Test case 1: Empty tree
+        System.out.println(solution.preorderTraversal(null));
+        // Test case 2: Tree with one node
+        TreeNode root1 = new TreeNode(1);
+        System.out.println(solution.preorderTraversal(root1));
+        // Test case 3: Tree with multiple nodes
+        TreeNode root2 = new TreeNode(1);
+        root2.left = new TreeNode(2);
+        root2.right = new TreeNode(3);
+        root2.left.left = new TreeNode(4);
+        root2.left.right = new TreeNode(5);
+        System.out.println(solution.preorderTraversal(root2));
     }
 }
