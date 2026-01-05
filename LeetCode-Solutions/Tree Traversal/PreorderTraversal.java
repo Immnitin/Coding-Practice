@@ -8,16 +8,15 @@ import java.util.Stack;
  * @author [Your Name]
  * @version 1.0
  */
-public class Solution {
+public class PreorderTraversal {
     /**
-     * Uses a stack-based iterative approach to perform a preorder traversal of the binary tree.
-     * The algorithm starts by pushing the root node onto the stack, then enters a loop where it pops a node from the stack, adds its value to the result list, and pushes its right and left children onto the stack.
+     * This method performs a preorder traversal of a binary tree and returns the result as a list.
      * 
-     * Time Complexity: O(N), where N is the number of nodes in the binary tree, since each node is visited once.
-     * Space Complexity: O(N), where N is the number of nodes in the binary tree, since in the worst case, the stack can contain all nodes at the last level of the tree.
+     * Approach: The solution uses two approaches: recursive and iterative. The recursive approach uses function calls to traverse the tree, while the iterative approach uses a stack to store nodes to be visited.
      * 
-     * @param root The root of the binary tree.
-     * @return A list of node values in preorder traversal order.
+     * Time Complexity: O(n), where n is the number of nodes in the tree, since each node is visited once.
+     * 
+     * Space Complexity: O(n), where n is the number of nodes in the tree, since in the worst case, the recursive call stack or the stack used in the iterative approach can grow up to the height of the tree, which is n for an unbalanced tree.
      */
     /**
  * Definition for a binary tree node.
@@ -37,21 +36,27 @@ public class Solution {
 class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
     ArrayList<Integer> list=new ArrayList<>();
-    helper(root,list);
+    // recursive(root,list);
+    iterative(root,list);
     return list;
     }
-    public void helper(TreeNode root, ArrayList<Integer> list){
+    public void recursive(TreeNode root, ArrayList<Integer> list){
         if(root==null){
             return;
         }
-        // list.add(root.val);
-        // helper(root.left,list);
-        // helper(root.right,list);
-        Stack<TreeNode> stk=new Stack<>();
+        list.add(root.val);
+        recursive(root.left,list);
+        recursive(root.right,list);  
+    }
+    public void iterative(TreeNode root,List<Integer> path){
+         if(root==null){
+            return;
+        }
+         Stack<TreeNode> stk=new Stack<>();
         stk.push(root);
         while(!stk.isEmpty()){
             TreeNode num=stk.pop();
-            list.add(num.val);
+            path.add(num.val);
             if(num.right!=null){
                 stk.push(num.right);
             }
@@ -66,17 +71,20 @@ class Solution {
 class Driver {
     public static void main(String[] args) {
         Solution solution = new Solution();
-        // Test case 1: Empty tree
-        System.out.println(solution.preorderTraversal(null));
-        // Test case 2: Tree with one node
+        // Test case 1: A simple binary tree
         TreeNode root1 = new TreeNode(1);
-        System.out.println(solution.preorderTraversal(root1));
-        // Test case 3: Tree with multiple nodes
-        TreeNode root2 = new TreeNode(1);
-        root2.left = new TreeNode(2);
-        root2.right = new TreeNode(3);
-        root2.left.left = new TreeNode(4);
-        root2.left.right = new TreeNode(5);
-        System.out.println(solution.preorderTraversal(root2));
+        root1.left = new TreeNode(2);
+        root1.right = new TreeNode(3);
+        root1.left.left = new TreeNode(4);
+        root1.left.right = new TreeNode(5);
+        System.out.println("Preorder traversal of the first tree: " + solution.preorderTraversal(root1));
+        
+        // Test case 2: An empty tree
+        TreeNode root2 = null;
+        System.out.println("Preorder traversal of the second tree: " + solution.preorderTraversal(root2));
+        
+        // Test case 3: A tree with only one node
+        TreeNode root3 = new TreeNode(1);
+        System.out.println("Preorder traversal of the third tree: " + solution.preorderTraversal(root3));
     }
 }
