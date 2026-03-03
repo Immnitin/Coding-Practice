@@ -1,17 +1,19 @@
+
 import java.util.*;
+
 /**
- * This class calculates the maximum depth of a binary tree.
+ * This class provides a solution to find the maximum depth of a binary tree.
  * 
- * @author [Your Name]
- * @version 1.0
- * @since [Date]
- *
- * Approach: Uses a recursive depth-first search (DFS) approach to traverse the binary tree and calculate its maximum depth.
- * Time Complexity: O(N), where N is the number of nodes in the binary tree, since we visit each node once.
- * Space Complexity: O(H), where H is the height of the binary tree, due to the recursive call stack.
+ * Approach: 
+ * Uses a recursive depth-first search (DFS) approach to traverse the binary tree and calculate its maximum depth.
+ * 
+ * Time Complexity: 
+ * O(N), where N is the number of nodes in the binary tree, since we visit each node exactly once.
+ * 
+ * Space Complexity: 
+ * O(H), where H is the height of the binary tree, due to the recursive call stack.
  */
-public class MaxDepthOfBinaryTree {
-    /**
+/**
  * Definition for a binary tree node.
  * public class TreeNode {
  *     int val;
@@ -36,28 +38,28 @@ class Solution {
         return 1+Math.max(lt,rt);
     }
 }
-}
 
 class Driver {
     public static void main(String[] args) {
         Solution solution = new Solution();
+        
         // Test case 1: Balanced binary tree
         TreeNode root1 = new TreeNode(3);
         root1.left = new TreeNode(9);
         root1.right = new TreeNode(20);
         root1.right.left = new TreeNode(15);
         root1.right.right = new TreeNode(7);
-        System.out.println("Max depth of balanced binary tree: " + solution.maxDepth(root1));
-        
+        System.out.println("Max depth of tree 1: " + solution.maxDepth(root1));  // Output: 3
+
         // Test case 2: Unbalanced binary tree
         TreeNode root2 = new TreeNode(1);
         root2.right = new TreeNode(2);
         root2.right.right = new TreeNode(3);
         root2.right.right.right = new TreeNode(4);
-        System.out.println("Max depth of unbalanced binary tree: " + solution.maxDepth(root2));
-        
+        System.out.println("Max depth of tree 2: " + solution.maxDepth(root2));  // Output: 4
+
         // Test case 3: Empty binary tree
         TreeNode root3 = null;
-        System.out.println("Max depth of empty binary tree: " + solution.maxDepth(root3));
+        System.out.println("Max depth of tree 3: " + solution.maxDepth(root3));  // Output: 0
     }
 }
